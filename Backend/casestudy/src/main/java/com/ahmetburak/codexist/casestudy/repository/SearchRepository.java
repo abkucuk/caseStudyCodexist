@@ -1,4 +1,4 @@
-package com.ahmetburak.codexist.casestudy.controller;
+package com.ahmetburak.codexist.casestudy.repository;
 import com.ahmetburak.codexist.casestudy.model.Search;
 import org.springframework.data.jpa.repository.JpaRepository;
 
