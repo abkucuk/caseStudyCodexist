@@ -23,21 +23,27 @@ public class SearchController {
             Optional<Search> search = searchRepository.findByLatitudeAndLongitudeAndRadius(longitude, latitude, radius);
             if (search.isEmpty()){
                 // google api usage
-                //Search result = new Search();
+                Search result = new Search();
                 OkHttpClient client = new OkHttpClient().newBuilder()
                     .build();
                 MediaType mediaType = MediaType.parse("text/plain");
                 //RequestBody body = RequestBody.create(mediaType, "");
                 Request request = new Request.Builder()
-                    .url("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522%2C151.1957362&radius=1500&type=restaurant&keyword=cruise&key=YOUR_API_KEY")
+                    .url("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+longitude+","+latitude+"&radius="+radius+"&type=restaurant&key=AIzaSyDEO88Kp_sPinbcTiJXrmmb089oLxtqC0E")
                     .build();
                 //.method("GET", body)
-
                 Response response = client.newCall(request).execute();
-                return null;
+                result.setLatitude(latitude);
+                result.setLongitude(longitude);
+                result.setData(response.body().string());
+                result.setRadius(radius);
+                searchRepository.save(result);
+                return new ResponseEntity<>(result, HttpStatus.CREATED);
             }
-            return new ResponseEntity<>(null, HttpStatus.OK);
+
+            return new ResponseEntity<>(search.get(), HttpStatus.OK);
         }catch (Exception e){
+            System.out.println(e.getMessage());
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 
         }
