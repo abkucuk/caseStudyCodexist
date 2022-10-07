@@ -105,7 +105,7 @@ const App = () => {
         </Form>
 
         <br/>
-        {data == '' ? 'boş data' : 'dolu data'}
+        {data == '' ? '' : data}
       </div>
     </div>
   );
