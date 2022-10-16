@@ -29,7 +29,7 @@ public class SearchController {
                 MediaType mediaType = MediaType.parse("text/plain");
                 //RequestBody body = RequestBody.create(mediaType, "");
                 Request request = new Request.Builder()
-                    .url("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+longitude+","+latitude+"&radius="+radius+"&type=restaurant&key=AIzaSyDEO88Kp_sPinbcTiJXrmmb089oLxtqC0E")
+                    .url("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+longitude+","+latitude+"&radius="+radius+"&type=restaurant&key=")
                     .build();
                 //.method("GET", body)
                 Response response = client.newCall(request).execute();
